@@ -42,8 +42,7 @@ public sealed partial class App : Application
                     services
                         .AddSingleton(new WeatherForecasts.WeatherForecastsClient(channel));
                     services
-                        .AddSingleton(new Counter.CounterClient(channel))
-                        .AddTransient<MainPage>();
+                        .AddSingleton(new Counter.CounterClient(channel));
                 })
                 .Build();
         }
