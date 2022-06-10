@@ -22,8 +22,39 @@ namespace UnoBlazorApp1;
 /// </summary>
 public sealed partial class App : Application
 {
+    private readonly GrpcChannel _channel;
     private Window _window;
-    private IHost Host { get; }
+    private readonly Counter.CounterClient _counterClient;
+    public IHost Host { get; init; }
+
+    public App(GrpcChannel channel) : this()
+    {
+        _channel = channel;
+        _counterClient = new Counter.CounterClient(channel);
+
+#if __WASM__
+        try
+        {
+            Host = UnoHost
+                .CreateDefaultBuilder()
+                .ConfigureServices(services =>
+                {
+                    services
+                        .AddSingleton(new WeatherForecasts.WeatherForecastsClient(channel))
+                        .AddTransient<MainPageViewModel>();
+                    services
+                        .AddSingleton(new Counter.CounterClient(channel));
+
+                })
+                .Build();
+            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+#endif
+    }
 
     /// <summary>
     /// Initializes the singleton application object.  This is the first line of authored code
@@ -31,31 +62,6 @@ public sealed partial class App : Application
     /// </summary>
     public App()
     {
-#if __WASM__
-        try
-        {
-            var httpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler()));
-            var baseUri = "https://localhost:44366";
-            var channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions{HttpClient = httpClient});
-
-            Host = UnoHost
-                .CreateDefaultBuilder()
-                .ConfigureServices(services =>
-                {
-                    services
-                        .AddSingleton(new WeatherForecasts.WeatherForecastsClient(channel));
-                    services
-                        .AddSingleton(new Counter.CounterClient(channel));
-                })
-                .Build();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
-#endif
-
-
         InitializeLogging();
 
         this.InitializeComponent();
@@ -114,7 +120,7 @@ public sealed partial class App : Application
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MainPage), args.Arguments);
+                rootFrame.Navigate(typeof(MainPage), _counterClient);
             // Ensure the current window is active
             _window.Activate();
         }

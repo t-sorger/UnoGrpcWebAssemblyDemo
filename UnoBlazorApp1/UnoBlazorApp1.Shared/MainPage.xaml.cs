@@ -2,7 +2,11 @@
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using System.Reflection.Metadata.Ecma335;
 using System.Windows.Input;
+using BlazorGrpcWebApp.Shared;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 
 namespace UnoBlazorApp1;
 
@@ -24,16 +28,24 @@ public sealed partial class MainPage : Page
 
     public ICommand IncrementCommand { get; set; }
 
-    public MainPage(Counter.CounterClient counterClient)
+    public MainPage()
     {
-        _counterClient = counterClient;
         this.InitializeComponent();
-
-        //IncrementCommand += (async (sender, e) => await _counterClient.IncrementCountAsync(new Empty()));
+        DataContext = (Application.Current as App)?.Host.Services.GetRequiredService<MainPageViewModel>();
     }
+
     public void Button1_Click(object sender, EventArgs e)
     {
-        var reply = CounterClient.IncrementCount(new Empty());
-        _grpcCounterValue = reply.Count;
+
+        try
+        {
+            var reply = (DataContext as MainPageViewModel)?.WeatherClient?.GetWeather(new WeatherForecast(new WeatherForecast()));
+        }
+        catch (Exception exception)
+        {
+            // Cannot wait on monitors on this runtime.
+            Console.WriteLine(exception);
+        }
+        //GrpcCounterValue = reply.Count;
     }
 }
