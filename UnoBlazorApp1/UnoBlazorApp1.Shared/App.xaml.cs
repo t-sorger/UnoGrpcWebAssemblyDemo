@@ -1,19 +1,28 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using Uno.Extensions.Hosting;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using BlazorGrpcWebApp.Shared;
+using Count;
+using Grpc.Net.Client;
+using Uno.Extensions;
 
 namespace UnoBlazorApp1
 {
+
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     public sealed partial class App : Application
     {
         private Window _window;
+        private IHost Host { get; }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -21,12 +30,24 @@ namespace UnoBlazorApp1
         /// </summary>
         public App()
         {
+#if __WASM__
+            var builder = UnoHost.CreateDefaultBuilder();
+            Host = UnoHost.CreateDefaultBuilder().Build();
+
+            var baseUri = "https://localhost:44366";
+            var channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions());
+            Host.Services.AddInstance(typeof(WeatherForecasts.WeatherForecastsClient),
+                new WeatherForecasts.WeatherForecastsClient(channel));
+            Host.Services.AddInstance(typeof(Counter.CounterClient), new Counter.CounterClient(channel));
+#endif
+
+
             InitializeLogging();
 
             this.InitializeComponent();
 
 #if HAS_UNO || NETFX_CORE
-            this.Suspending += OnSuspending;
+            Suspending += OnSuspending;
 #endif
         }
 
@@ -48,7 +69,7 @@ namespace UnoBlazorApp1
             _window = new Window();
             _window.Activate();
 #else
-            _window = Microsoft.UI.Xaml.Window.Current;
+            _window = Window.Current;
 #endif
 
             var rootFrame = _window.Content as Frame;
@@ -76,12 +97,10 @@ namespace UnoBlazorApp1
 #endif
             {
                 if (rootFrame.Content == null)
-                {
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
                     rootFrame.Navigate(typeof(MainPage), args.Arguments);
-                }
                 // Ensure the current window is active
                 _window.Activate();
             }
@@ -92,7 +111,7 @@ namespace UnoBlazorApp1
         /// </summary>
         /// <param name="sender">The Frame which failed navigation</param>
         /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new InvalidOperationException($"Failed to load {e.SourcePageType.FullName}: {e.Exception}");
         }
@@ -117,14 +136,14 @@ namespace UnoBlazorApp1
         private static void InitializeLogging()
         {
 #if DEBUG
-			// Logging is disabled by default for release builds, as it incurs a significant
-			// initialization cost from Microsoft.Extensions.Logging setup. If startup performance
-			// is a concern for your application, keep this disabled. If you're running on web or 
-			// desktop targets, you can use url or command line parameters to enable it.
-			//
-			// For more performance documentation: https://platform.uno/docs/articles/Uno-UI-Performance.html
+            // Logging is disabled by default for release builds, as it incurs a significant
+            // initialization cost from Microsoft.Extensions.Logging setup. If startup performance
+            // is a concern for your application, keep this disabled. If you're running on web or 
+            // desktop targets, you can use url or command line parameters to enable it.
+            //
+            // For more performance documentation: https://platform.uno/docs/articles/Uno-UI-Performance.html
 
-			var factory = LoggerFactory.Create(builder =>
+            var factory = LoggerFactory.Create(builder =>
             {
 #if __WASM__
                 builder.AddProvider(new global::Uno.Extensions.Logging.WebAssembly.WebAssemblyConsoleLoggerProvider());
@@ -172,10 +191,10 @@ namespace UnoBlazorApp1
                 // builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug );
             });
 
-            global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
+            LogExtensionPoint.AmbientLoggerFactory = factory;
 
 #if HAS_UNO
-			global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
+            Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
 #endif
 #endif
         }
