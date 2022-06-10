@@ -7,5 +7,5 @@ Therefore I got inspired by [the content provided by this article](https://azure
 After everthing was working, I added a Uno Platform WebAssembly app to replace the BlazorApp client. This is the current state of the project.
 
 ### Current Problem
-- When trying to create a ``` GrpcChannel ``` the application gets a ``` System.NullReferenceException ```.
+- When trying to create a ``` GrpcChannel ``` the application gets a ``` System.NullReferenceException ``` as described in [this stackoverflow question](https://stackoverflow.com/questions/72573187/cannot-create-grpcchannel-in-uno-platform-webassembly-system-nullreferenceexcep).
 - Unclear on how to start the Uno WebAssembly application as described in [this discussion](https://github.com/unoplatform/uno/discussions/8994#discussioncomment-2920130). 
