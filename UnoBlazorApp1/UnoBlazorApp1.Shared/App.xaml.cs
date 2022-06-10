@@ -4,12 +4,14 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using System.Net.Http;
 using Uno.Extensions.Hosting;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using BlazorGrpcWebApp.Shared;
 using Count;
 using Grpc.Net.Client;
+using Grpc.Net.Client.Web;
 using Microsoft.Extensions.DependencyInjection;
 using Uno.Extensions;
 
@@ -32,8 +34,9 @@ public sealed partial class App : Application
 #if __WASM__
         try
         {
+            var httpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler()));
             var baseUri = "https://localhost:44366";
-            var channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions());
+            var channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions{HttpClient = httpClient});
 
             Host = UnoHost
                 .CreateDefaultBuilder()
