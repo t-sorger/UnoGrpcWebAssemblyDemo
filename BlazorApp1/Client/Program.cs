@@ -9,35 +9,34 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 
-namespace BlazorApp1.Client
+namespace BlazorApp1.Client;
+
+public class Program
 {
-    public class Program
+    private static GrpcChannel _channel;
+
+    public static async Task Main(string[] args)
     {
-        private static GrpcChannel _channel;
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.RootComponents.Add<App>("#app");
 
-        public static async Task Main(string[] args)
+        // builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+        var httpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler()));
+        //var baseUri = services.GetRequiredService<NavigationManager>().BaseUri;
+        var baseUri = "https://localhost:44366";
+        _channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions { HttpClient = httpClient });
+
+        builder.Services.AddSingleton(services =>
         {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<App>("#app");
+            return new WeatherForecasts.WeatherForecastsClient(_channel);
+        });
 
-            // builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+        builder.Services.AddSingleton(services =>
+        {
+            return new Counter.CounterClient(_channel);
+        });
 
-            var httpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler()));
-            //var baseUri = services.GetRequiredService<NavigationManager>().BaseUri;
-            var baseUri = "https://localhost:44366";
-            _channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions { HttpClient = httpClient });
-
-            builder.Services.AddSingleton(services =>
-            {
-                return new WeatherForecasts.WeatherForecastsClient(_channel);
-            });
-
-            builder.Services.AddSingleton(services =>
-            {
-                return new Counter.CounterClient(_channel);
-            });
-
-            await builder.Build().RunAsync();
-        }
+        await builder.Build().RunAsync();
     }
 }
