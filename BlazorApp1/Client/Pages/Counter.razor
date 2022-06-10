@@ -1,0 +1,21 @@
+﻿@page "/counter"
+@using Google.Protobuf.WellKnownTypes
+@inject Count.Counter.CounterClient CounterClient 
+
+<h1>Counter</h1>
+
+<p>Grpc count: @_grpcCount</p>
+
+<button class="btn btn-primary" @onclick="GrpcIncrementCount">GrpcIncrementCount</button>
+
+@code {
+
+    private int _grpcCount = 0;
+
+    private async Task GrpcIncrementCount()
+    {
+        var reply = await CounterClient.IncrementCountAsync(new Empty());
+        _grpcCount = reply.Count;
+    }
+
+}
