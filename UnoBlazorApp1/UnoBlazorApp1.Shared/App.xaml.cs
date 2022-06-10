@@ -10,6 +10,7 @@ using Windows.ApplicationModel.Activation;
 using BlazorGrpcWebApp.Shared;
 using Count;
 using Grpc.Net.Client;
+using Microsoft.Extensions.DependencyInjection;
 using Uno.Extensions;
 
 namespace UnoBlazorApp1
@@ -31,14 +32,21 @@ namespace UnoBlazorApp1
         public App()
         {
 #if __WASM__
-            var builder = UnoHost.CreateDefaultBuilder();
-            Host = UnoHost.CreateDefaultBuilder().Build();
-
             var baseUri = "https://localhost:44366";
             var channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions());
-            Host.Services.AddInstance(typeof(WeatherForecasts.WeatherForecastsClient),
-                new WeatherForecasts.WeatherForecastsClient(channel));
-            Host.Services.AddInstance(typeof(Counter.CounterClient), new Counter.CounterClient(channel));
+
+
+            var builder = UnoHost.CreateDefaultBuilder();
+            Host = UnoHost
+                .CreateDefaultBuilder()
+                .ConfigureServices(services =>
+                {
+                    services
+                        .AddSingleton(new WeatherForecasts.WeatherForecastsClient(channel));
+                    services
+                        .AddSingleton(new Counter.CounterClient(channel));
+                })
+                .Build();
 #endif
 
 

@@ -17,6 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnoBlazorApp1.Wasm", "UnoBl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnoSample", "UnoSample", "{3E722777-5EB4-414C-8342-0A4FC0CD8BD8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4AE91FE2-9CAA-4241-9CEB-85CDE6FC5F64}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
