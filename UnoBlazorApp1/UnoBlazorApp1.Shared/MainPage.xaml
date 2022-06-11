@@ -8,10 +8,10 @@
     mc:Ignorable="d"    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock Text="Hello, world!" Margin="20" FontSize="30" />
+    <StackPanel Spacing="20" Margin="30">
+        <TextBlock Text="Press button to increment counter!" FontSize="30" />
 
-        <TextBox x:Name="CounterValue" Text="{Binding GrpcCounterValue}" FontSize="20"/>
-        <Button x:Name="Button" Content="Grpc" Click="Button1_Click" />
-    </Grid>
+        <TextBlock x:Name="CounterValue" FontSize="20">0</TextBlock>
+        <Button x:Name="Button" Content="Increment" Click="Increment_Click" />
+    </StackPanel>
 </Page>
