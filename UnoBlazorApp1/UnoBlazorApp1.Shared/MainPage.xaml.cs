@@ -15,6 +15,9 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Count;
 using Google.Protobuf.WellKnownTypes;
+using System.Net.Http;
+using Grpc.Net.Client.Web;
+using Grpc.Net.Client;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -38,18 +41,20 @@ public sealed partial class MainPage : Page
 
     public ICommand IncrementCommand { get; set; }
 
-    public MainPage(Counter.CounterClient counterClient)
+    public MainPage()
     {
-        _counterClient = counterClient;
-        this.InitializeComponent();
+        var httpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler()));
+        var baseUri = "https://localhost:44366";
+        var channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions { HttpClient = httpClient });
+        _counterClient = new Counter.CounterClient(channel);
 
-        //IncrementCommand += (async (sender, e) => await _counterClient.IncrementCountAsync(new Empty()));
+        this.InitializeComponent();
     }
 
 
-    public void Button1_Click(object sender, EventArgs e)
+    public async void Increment_Click(object sender, EventArgs e)
     {
-        var reply = CounterClient.IncrementCount(new Empty());
-        _grpcCounterValue = reply.Count;
+        var reply = await CounterClient.IncrementCountAsync(new Empty());
+        CounterValue.Text = $"{reply.Count}";
     }
 }

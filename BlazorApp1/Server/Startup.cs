@@ -53,8 +53,10 @@ namespace BlazorApp1.Server
 
             app.UseRouting();
 
-            // must be added after UseRouting and before UseEndpoints 
-            app.UseGrpcWeb();
+            app.UseCors(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
+			// must be added after UseRouting and before UseEndpoints 
+			app.UseGrpcWeb();
 
             app.UseEndpoints(endpoints =>
             {
