@@ -52,8 +52,7 @@
 		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\BlazorApp1\Shared\BlazorApp1.Shared.csproj" />
+	  <ProjectReference Include="..\..\BlazorSample\Shared\BlazorApp1.Shared.csproj" />
 	</ItemGroup>
-	<Import Project="..\UnoBlazorApp1.Shared\UnoBlazorApp1.Shared.projitems" Label="Shared"
-	        Condition="Exists('..\UnoBlazorApp1.Shared\UnoBlazorApp1.Shared.projitems')" />
+	<Import Project="..\UnoBlazorApp1.Shared\UnoBlazorApp1.Shared.projitems" Label="Shared" Condition="Exists('..\UnoBlazorApp1.Shared\UnoBlazorApp1.Shared.projitems')" />
 </Project>

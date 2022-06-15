@@ -5,17 +5,25 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorSample", "BlazorSample", "{29822A21-A00F-474D-B872-7892160BC80F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Server", "BlazorApp1\Server\BlazorApp1.Server.csproj", "{DAA3F2FD-3EB3-475D-927E-D5724A191345}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Server", "BlazorSample\Server\BlazorApp1.Server.csproj", "{DAA3F2FD-3EB3-475D-927E-D5724A191345}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Client", "BlazorApp1\Client\BlazorApp1.Client.csproj", "{8A824CEA-511B-4E9C-B88E-61D07D9F540E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Client", "BlazorSample\Client\BlazorApp1.Client.csproj", "{8A824CEA-511B-4E9C-B88E-61D07D9F540E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Shared", "BlazorApp1\Shared\BlazorApp1.Shared.csproj", "{FE377803-4C49-41D2-ADBB-8FBDB0043A4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Shared", "BlazorSample\Shared\BlazorApp1.Shared.csproj", "{FE377803-4C49-41D2-ADBB-8FBDB0043A4B}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UnoBlazorApp1.Shared", "UnoBlazorApp1\UnoBlazorApp1.Shared\UnoBlazorApp1.Shared.shproj", "{D3FB3F64-E69B-41E5-B78E-384BC3EBC747}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UnoBlazorApp1.Shared", "UnoSample\UnoBlazorApp1.Shared\UnoBlazorApp1.Shared.shproj", "{D3FB3F64-E69B-41E5-B78E-384BC3EBC747}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnoBlazorApp1.Wasm", "UnoBlazorApp1\UnoBlazorApp1.Wasm\UnoBlazorApp1.Wasm.csproj", "{D5C6AC0B-781F-46AF-B2C3-DDAC5413B607}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnoBlazorApp1.Wasm", "UnoSample\UnoBlazorApp1.Wasm\UnoBlazorApp1.Wasm.csproj", "{D5C6AC0B-781F-46AF-B2C3-DDAC5413B607}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnoSample", "UnoSample", "{3E722777-5EB4-414C-8342-0A4FC0CD8BD8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PrismAspNet", "PrismAspNet", "{BA10D3D7-A15E-4BA4-9592-AAC7AF37136E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Client", "PrismAspNet\Client\BlazorApp1.Client.csproj", "{572BC89A-8F0D-485F-95B4-4F1E5F49874D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Server", "PrismAspNet\Server\BlazorApp1.Server.csproj", "{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Shared", "PrismAspNet\Shared\BlazorApp1.Shared.csproj", "{B2D6F576-F62B-4830-8F92-C3143E512A69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +101,54 @@ Global
 		{D5C6AC0B-781F-46AF-B2C3-DDAC5413B607}.Release|x64.Build.0 = Release|Any CPU
 		{D5C6AC0B-781F-46AF-B2C3-DDAC5413B607}.Release|x86.ActiveCfg = Release|Any CPU
 		{D5C6AC0B-781F-46AF-B2C3-DDAC5413B607}.Release|x86.Build.0 = Release|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Debug|arm64.Build.0 = Debug|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Debug|x64.Build.0 = Debug|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Debug|x86.Build.0 = Debug|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Release|arm64.ActiveCfg = Release|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Release|arm64.Build.0 = Release|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Release|x64.ActiveCfg = Release|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Release|x64.Build.0 = Release|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Release|x86.ActiveCfg = Release|Any CPU
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D}.Release|x86.Build.0 = Release|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Debug|arm64.Build.0 = Debug|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Debug|x64.Build.0 = Debug|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Debug|x86.Build.0 = Debug|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Release|arm64.ActiveCfg = Release|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Release|arm64.Build.0 = Release|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Release|x64.ActiveCfg = Release|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Release|x64.Build.0 = Release|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Release|x86.ActiveCfg = Release|Any CPU
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E}.Release|x86.Build.0 = Release|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Debug|arm64.Build.0 = Debug|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Debug|x64.Build.0 = Debug|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Debug|x86.Build.0 = Debug|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Release|arm64.ActiveCfg = Release|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Release|arm64.Build.0 = Release|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Release|x64.ActiveCfg = Release|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Release|x64.Build.0 = Release|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2D6F576-F62B-4830-8F92-C3143E512A69}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,12 +159,15 @@ Global
 		{FE377803-4C49-41D2-ADBB-8FBDB0043A4B} = {29822A21-A00F-474D-B872-7892160BC80F}
 		{D3FB3F64-E69B-41E5-B78E-384BC3EBC747} = {3E722777-5EB4-414C-8342-0A4FC0CD8BD8}
 		{D5C6AC0B-781F-46AF-B2C3-DDAC5413B607} = {3E722777-5EB4-414C-8342-0A4FC0CD8BD8}
+		{572BC89A-8F0D-485F-95B4-4F1E5F49874D} = {BA10D3D7-A15E-4BA4-9592-AAC7AF37136E}
+		{E41073D1-DDEF-40F5-95DB-70814ECBFA7E} = {BA10D3D7-A15E-4BA4-9592-AAC7AF37136E}
+		{B2D6F576-F62B-4830-8F92-C3143E512A69} = {BA10D3D7-A15E-4BA4-9592-AAC7AF37136E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B0944B5-683A-4E6D-9A22-D52ED42DABED}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		UnoBlazorApp1\UnoBlazorApp1.Shared\UnoBlazorApp1.Shared.projitems*{d3fb3f64-e69b-41e5-b78e-384bc3ebc747}*SharedItemsImports = 13
-		UnoBlazorApp1\UnoBlazorApp1.Shared\UnoBlazorApp1.Shared.projitems*{d5c6ac0b-781f-46af-b2c3-ddac5413b607}*SharedItemsImports = 5
+		UnoSample\UnoBlazorApp1.Shared\UnoBlazorApp1.Shared.projitems*{d3fb3f64-e69b-41e5-b78e-384bc3ebc747}*SharedItemsImports = 13
+		UnoSample\UnoBlazorApp1.Shared\UnoBlazorApp1.Shared.projitems*{d5c6ac0b-781f-46af-b2c3-ddac5413b607}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
